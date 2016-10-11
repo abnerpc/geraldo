@@ -1,5 +1,5 @@
 import datetime
-from base import ReportGenerator
+from .base import ReportGenerator
 
 from geraldo.base import cm, TA_CENTER, TA_RIGHT
 from geraldo.utils import get_attr_value, calculate_size
@@ -120,7 +120,7 @@ class TextGenerator(ReportGenerator):
 
         # Saves to file or just returns the text
         if hasattr(self, 'filename'):
-            fp = file(self.filename, 'w')
+            fp = open(self.filename, 'w')
             fp.write(text)
             fp.close()
         else:
@@ -132,7 +132,7 @@ class TextGenerator(ReportGenerator):
 
     def calculate_size(self, size):
         """Uses the function 'calculate_size' to calculate a size"""
-        if isinstance(size, basestring):
+        if isinstance(size, str):
             if size.endswith('*cols') or size.endswith('*col'):
                 return int(size.split('*')[0]) * self.character_width
             elif size.endswith('*rows') or size.endswith('*row'):
